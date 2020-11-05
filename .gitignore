@@ -1,0 +1,9 @@
+.idea/*
+data/*
+logs/*
+resources/influxdb-java-2.8.jar
+resources/server_influxdb_credentials.txt
+target/*
+.classpath
+.project
+test_influxdb_n_data_ingestion.iml
