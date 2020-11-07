@@ -18,15 +18,25 @@ The repository is a Maven project. Therefore, the dependency that will automatic
     -   Inside the folder, copy-paste the printers parsed log files, whose timestamp is defined in nanoseconds;
 -   Inside the folder `resources`,
     -   Create a file called `server_influxdb_credentials.txt`, containing the username (first line) and the password (second line) to access the server InfluxDB database;
+-   Run the database
+    -   Execute `sudo influxd`
+    -   In case of the error "run: open server: open tsdb store: cannot allocate memory", execute `bash scripts/fix_memory.sh`, which can be found in the repository "test_influxdb_data_ingestion".
 -   Run the project
     -   Open IntelliJ IDEA
     -   Compile the maven project
-    -   Execute the main method in the `src/main/java/Main.java` file
-    -   If needed, switch the indexes of the databases (see next paragraph).
+    -   If needed, switch the indexes of the databases by executing `bash scripts/switch_index_to.sh`, followed by "tsi1" or "inmem", based on the required index. The script can be found in the repository "test_influxdb_data_ingestion".
+    -   Execute the main method in the `src/main/java/Main.java` file.
+    
 
 ## Preparing an executable jar file
 Since I couldn't manage to find a way with the command line, I used IntelliJ:
--   ---TODO---
+-   `File > Project Structure... `
+    -   `Artifacts > + > JAR > From modules with dependencies`
+        -   Select the model `test_influxdb_n_data_ingestion`
+        -   Select the main class `Main.java`
+        -   `Ok`
+    -   Tick `Include in project build`
+    -   `Ok`
 -   Execute the JAR file:
     -   If you have this repository available:
         -   From the main directory, execute `java -jar standalone/NDataIngestionTest.jar`.
@@ -49,4 +59,4 @@ Since I couldn't manage to find a way with the command line, I used IntelliJ:
     -   Execute `scp data/TEMPERATURE_nodup.csv sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/data`;
 -   Execute the JAR file (use the terminal connected through SSH):
     -   Execute `cd standalone_n_ingestion`;
-    -   Execute `nohup java -jar NDataIngestionTest.jar [N] [l/s] [file_name_in_data_folder] > logs/out.txt &`.
+    -   Execute `nohup java -jar NDataIngestionTest.jar [N] [l/s] [file_name_in_data_folder] > logs/out.txt &`

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.sql.*;
 import java.util.Scanner;
 import java.util.logging.*;
 import java.util.concurrent.TimeUnit;
@@ -29,9 +28,6 @@ public class DatabaseInteractions {
   static String retention_policy_name = "testPolicy";
   static String duration = "INF";
   static String replication = "1";
-
-  // Logger formatter
-  static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
 
   // Location of file containing data
   String data_file_path;
@@ -102,7 +98,6 @@ public class DatabaseInteractions {
       logger.severe("Supposed rows inserted: "+rows_inserted+" but found "+rows_count);
     }
   }
-
 
   // Iterating through data, inserting it i at a time
   public void insertMultipleTuples(int N, Logger logger) {

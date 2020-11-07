@@ -1,5 +1,4 @@
 import java.io.*;
-import java.sql.*;
 import java.util.Scanner;
 import java.util.logging.*;
 import java.sql.Timestamp;
@@ -92,8 +91,8 @@ public class Main {
 
     System.out.println("3 questions for you!");
 
-    String response = "";
-    boolean correct_answer = false;
+    String response;
+    boolean correct_answer;
 
     // Understanding the N
     while (N < 1) {
@@ -102,7 +101,6 @@ public class Main {
     }
 
     // Understanding whether the user wants the sever db or the local db
-    response = "";
     correct_answer = false;
     while (!correct_answer) {
       System.out.print("2. Where do you want it to be executed?"
@@ -120,7 +118,6 @@ public class Main {
     }
 
     // Understanding which file to run
-    response = "";
     correct_answer = false;
     while (!correct_answer) {
       System.out.print("3. Finally, inside the data folder, what is the name" +
@@ -150,7 +147,7 @@ public class Main {
     if (i == 1) {
       logs_path += dateAsString+"__"+N+"/";
       File file = new File(logs_path);
-      boolean bool = file.mkdirs();
+      file.mkdirs();
     }
 
     // Instantiating general logger
