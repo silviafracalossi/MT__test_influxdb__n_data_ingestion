@@ -57,7 +57,7 @@ Since I couldn't manage to find a way with the command line, I used IntelliJ:
     -   Execute `scp resources/server_influxdb_credentials.txt sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/resources`;
     -   Execute `scp resources/logging.properties sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/resources`;
 -   Send the data file:
-    -   Execute `scp data/TEMPERATURE_nodup.csv sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/data`;
+    -   Execute `scp data/TEMPERATURE_1GB_ns.csv sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/data`;
 -   Execute the JAR file (use the terminal connected through SSH):
-    -   Execute `cd standalone_n_ingestion`;
+    -   Execute `cd influxdb/standalone_n_ingestion`;
     -   Execute `nohup java -jar NDataIngestionTest.jar [M] [N] [l/s] [file_name_in_data_folder] > logs/out.txt &`
