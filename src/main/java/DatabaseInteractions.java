@@ -134,7 +134,7 @@ public class DatabaseInteractions {
                 .addField("value", Integer.parseInt(fields[1]))
                 .build();
         batchPoints.point(point);
-        logger_text += "(\"+fields[0]+\",\"+fields[1]+\") ";
+        logger_text += "("+fields[0]+", "+fields[1]+") ";
         no_rows_waiting++;
 
         // Executing the query and checking the result, if number of rows is enough
