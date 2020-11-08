@@ -22,7 +22,7 @@ public class DatabaseInteractions {
   // Databases Username, Password and Database name
   static final String username = "root";
   static final String password = "root";
-  static final String dbName = "test_table";
+  static final String dbName = "test_table_n";
 
   // Retention policy definition
   static String retention_policy_name = "testPolicy";

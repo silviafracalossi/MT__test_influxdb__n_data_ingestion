@@ -7,6 +7,7 @@ Tester of the InfluxDB ability of ingesting time series data, from 1 to N tuples
 -   `logs/`, containing the log information of all the tests done;
 -   `resources/`, containing the InfluxDB driver, the database credentials file and the logger properties;
 -   `src/`, containing the java source files;
+-   `standalone/`, containing the JAR standalone version of this repository;
 -   `target/`, containing the generated .class files after compiling the java code.
 
 ## Requirements
@@ -59,4 +60,4 @@ Since I couldn't manage to find a way with the command line, I used IntelliJ:
     -   Execute `scp data/TEMPERATURE_nodup.csv sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/data`;
 -   Execute the JAR file (use the terminal connected through SSH):
     -   Execute `cd standalone_n_ingestion`;
-    -   Execute `nohup java -jar NDataIngestionTest.jar [N] [l/s] [file_name_in_data_folder] > logs/out.txt &`
+    -   Execute `nohup java -jar NDataIngestionTest.jar [M] [N] [l/s] [file_name_in_data_folder] > logs/out.txt &`

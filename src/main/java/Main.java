@@ -12,7 +12,7 @@ public class Main {
   static Scanner sc = new Scanner(System.in);
   static boolean useServerInfluxDB = true;
   static String data_file_path = "data/TEMPERATURE_nodup.csv";
-  static int N = 0;
+  static int N=0, M=0;
 
   // Logger names date formatter
   static String logs_path = "logs/";
@@ -28,22 +28,23 @@ public class Main {
     try {
 
       // Getting information from user
-      if (args.length != 3) {
+      if (args.length != 4) {
         talkToUser();
       } else {
 
-        // Getting the max size of tuples inserted together
-        N = Integer.parseInt(args[0]);
+        // Getting the min-max size of tuples inserted together
+        M = Integer.parseInt(args[0]);
+        N = Integer.parseInt(args[1]);
 
         // Understanding the DB required
-        if (args[1].compareTo("l") == 0) {
+        if (args[2].compareTo("l") == 0) {
           useServerInfluxDB = false;
         }
 
         // Understanding the data file name
-        File f = new File("data/"+args[2]);
+        File f = new File("data/"+args[3]);
         if(f.exists() && !f.isDirectory()) {
-          data_file_path = "data/"+args[2];
+          data_file_path = "data/"+args[3];
         }
       }
 
@@ -55,7 +56,7 @@ public class Main {
       System.out.println("---Start of Tests!---");
 
       // Repeating the test N times
-      for (int i=1; i<=N; i++) {
+      for (int i=M; i<=N; i++) {
 
         // Creating logger
         Logger logger = instantiateLogger(i);
@@ -89,21 +90,27 @@ public class Main {
   // Interactions with the user to understand his/her preferences
   public static void talkToUser () throws Exception {
 
-    System.out.println("3 questions for you!");
+    System.out.println("4 questions for you!");
 
     String response;
     boolean correct_answer;
 
     // Understanding the N
-    while (N < 1) {
-      System.out.print("1. What is the max number of tuples inserted together?: ");
+    while (M < 1) {
+      System.out.print("1. What is the min number of tuples inserted together?: ");
+      M = Integer.parseInt(sc.nextLine());
+    }
+
+    // Understanding the N
+    while (N < 1 && N < M) {
+      System.out.print("2. What is the max number of tuples inserted together?: ");
       N = Integer.parseInt(sc.nextLine());
     }
 
     // Understanding whether the user wants the sever db or the local db
     correct_answer = false;
     while (!correct_answer) {
-      System.out.print("2. Where do you want it to be executed?"
+      System.out.print("3. Where do you want it to be executed?"
       +" (Type \"s\" for server database,"
       +" type \"l\" for local database): ");
       response = sc.nextLine().replace(" ", "");
@@ -120,7 +127,7 @@ public class Main {
     // Understanding which file to run
     correct_answer = false;
     while (!correct_answer) {
-      System.out.print("3. Finally, inside the data folder, what is the name" +
+      System.out.print("4. Finally, inside the data folder, what is the name" +
       " of the file containing the data to be inserted? ");
       response = sc.nextLine().replace(" ", "");
 
@@ -144,7 +151,7 @@ public class Main {
     String dateAsString = simpleDateFormat.format(now);
 
     // Setting the name of the folder
-    if (i == 1) {
+    if (i == M) {
       logs_path += dateAsString+"__"+N+"/";
       File file = new File(logs_path);
       file.mkdirs();
