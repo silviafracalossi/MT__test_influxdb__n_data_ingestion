@@ -22,7 +22,7 @@ public class DatabaseInteractions {
   // Databases Username, Password and Database name
   static final String username = "root";
   static final String password = "root";
-  static final String dbName = "test_table_n";
+  static String dbName;
 
   // Retention policy definition
   static String retention_policy_name = "testPolicy";
@@ -33,7 +33,8 @@ public class DatabaseInteractions {
   String data_file_path;
 
   // Constructor
-  public DatabaseInteractions(String data_file_path, Boolean useServerInfluxDB) {
+  public DatabaseInteractions(String dbName, String data_file_path, Boolean useServerInfluxDB) {
+    this.dbName=dbName;
     this.useServerInfluxDB=useServerInfluxDB;
     this.data_file_path=data_file_path;
   }
