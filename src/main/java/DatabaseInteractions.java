@@ -2,6 +2,10 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.logging.*;
 import java.util.concurrent.TimeUnit;
+
+import com.influxdb.client.InfluxDBClientFactory;
+import com.influxdb.client.InfluxDBClientOptions;
+import okhttp3.OkHttpClient;
 import org.influxdb.InfluxDB;
 import org.influxdb.InfluxDBException;
 import org.influxdb.InfluxDBFactory;
@@ -200,7 +204,11 @@ public class DatabaseInteractions {
   public static boolean createDBConnection() {
     String pos_complete_url;
     if (useServerInfluxDB) {
-      influxDB = InfluxDBFactory.connect(serverURL, username, password);
+      OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient().newBuilder()
+              .connectTimeout(180, TimeUnit.SECONDS)
+              .readTimeout(180, TimeUnit.SECONDS)
+              .writeTimeout(180, TimeUnit.SECONDS);
+      influxDB = InfluxDBFactory.connect(serverURL, username, password, okHttpClientBuilder);
     } else {
       influxDB = InfluxDBFactory.connect(localURL, username, password);
     }
@@ -212,7 +220,7 @@ public class DatabaseInteractions {
 
   // Creating the table "test_table" in the database
   public static void createDatabase () {
-    removeDatabase();
+    // removeDatabase();
     influxDB.createDatabase(dbName);
 
     // CREATE RETENTION POLICY testPolicy ON test_table DURATION INF REPLICATION 1
@@ -234,14 +242,14 @@ public class DatabaseInteractions {
     return (count > -1) ? count : 0;
   }
 
-  // Dropping the table "test_table" from the database
-  public static void removeDatabase() {
-    try {
-      influxDB.deleteDatabase(dbName);
-    } catch (NullPointerException e) {
-      System.out.println("Test table was already removed");
-    }
-  }
+//  // Dropping the table "test_table" from the database
+//  public static void removeDatabase() {
+//    try {
+//      influxDB.deleteDatabase(dbName);
+//    } catch (NullPointerException e) {
+//      System.out.println("Test table was already removed");
+//    }
+//  }
 
   // Closing the connections to the database
   public static void closeDBConnection() {
