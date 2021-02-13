@@ -17,8 +17,6 @@ The repository is a Maven project. Therefore, the dependency that will automatic
 ## Installation and running the project
 -   Create the folder `data`;
     -   Inside the folder, copy-paste the printers parsed log files, whose timestamp is defined in nanoseconds;
--   Inside the folder `resources`,
-    -   Create a file called `server_influxdb_credentials.txt`, containing the username (first line) and the password (second line) to access the server InfluxDB database;
 -   Run the database
     -   Execute `sudo influxd`
     -   In case of the error "run: open server: open tsdb store: cannot allocate memory", execute `bash scripts/fix_memory.sh`, which can be found in the repository "test_influxdb_data_ingestion".
@@ -27,7 +25,7 @@ The repository is a Maven project. Therefore, the dependency that will automatic
     -   Compile the maven project
     -   If needed, switch the indexes of the databases by executing `bash scripts/switch_index_to.sh`, followed by "tsi1" or "inmem", based on the required index. The script can be found in the repository "test_influxdb_data_ingestion".
     -   Execute the main method in the `src/main/java/Main.java` file.
-    
+
 
 ## Preparing an executable jar file
 Since I couldn't manage to find a way with the command line, I used IntelliJ:
@@ -54,7 +52,6 @@ Since I couldn't manage to find a way with the command line, I used IntelliJ:
     -   Execute `mkdir influxdb/standalone_n_ingestion/logs`;
 -   Send the JAR and the help files from another terminal (not connected through SSH):
     -   Execute `scp standalone/NDataIngestionTest.jar sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion`;
-    -   Execute `scp resources/server_influxdb_credentials.txt sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/resources`;
     -   Execute `scp resources/logging.properties sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/resources`;
 -   Send the data file:
     -   Execute `scp data/TEMPERATURE_nodup.csv sfracalossi@ironlady.inf.unibz.it:/data/sfracalossi/influxdb/standalone_n_ingestion/data`;
