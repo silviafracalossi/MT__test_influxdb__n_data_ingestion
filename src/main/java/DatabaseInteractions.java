@@ -24,8 +24,8 @@ public class DatabaseInteractions {
   static final String localURL = "http://localhost:8086";
 
   // Databases Username, Password and Database name
-  static final String username = "root";
-  static final String password = "root";
+  static final String username = "";
+  static final String password = "";
   static String dbName;
 
   // Retention policy definition
@@ -42,7 +42,7 @@ public class DatabaseInteractions {
     this.useServerInfluxDB=useServerInfluxDB;
     this.data_file_path=data_file_path;
   }
-  
+
   // Method called from for-loop in main, choosing correct method for insertion
   public void insertNTuples (int N, Logger logger) {
     if (N==0)   return;
